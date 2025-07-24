@@ -2,7 +2,7 @@ package goutils
 
 import "strings"
 
-func splitAndTrim(s string) []string {
+func SplitAndTrim(s string) []string {
 	parts := strings.Split(s, ",")
 	var result []string
 	for _, part := range parts {
