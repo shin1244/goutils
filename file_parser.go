@@ -2,6 +2,7 @@ package goutils
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -62,4 +63,25 @@ func OpenTxt(path string) ([]string, error) {
 	}
 
 	return lines, nil
+}
+
+// MakeJsonFile는 주어진 데이터를 JSON 형식으로 파일에 저장합니다.
+func MakeJsonFile(data any, filename string) {
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		fmt.Println("JSON 마샬 실패:", err)
+		return
+	}
+
+	jsonFile, err := os.Create(filename)
+	if err != nil {
+		fmt.Println("파일 생성 실패:", err)
+		return
+	}
+	defer jsonFile.Close()
+
+	_, err = jsonFile.Write(jsonData)
+	if err != nil {
+		fmt.Println("파일 쓰기 실패:", err)
+	}
 }
