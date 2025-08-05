@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/xuri/excelize/v2"
 )
@@ -84,4 +85,19 @@ func MakeJsonFile(data any, filename string) {
 	if err != nil {
 		fmt.Println("파일 쓰기 실패:", err)
 	}
+}
+
+// 폴더 내의 첫번째 XLSX 파일을 찾습니다.
+func FindXlsx() string {
+	cwd, _ := os.Getwd()
+	entries, _ := os.ReadDir(cwd)
+
+	for _, entry := range entries {
+		if !entry.IsDir() && strings.HasSuffix(entry.Name(), ".xlsx") {
+			return entry.Name()
+		}
+	}
+	fmt.Println("XLSX 파일을 찾을 수 없습니다. 현재 디렉토리에 XLSX 파일이 있는지 확인하세요.")
+	fmt.Scanln()
+	panic("XLSX 파일을 찾을 수 없습니다.")
 }
