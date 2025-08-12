@@ -87,7 +87,8 @@ func MakeJsonFile(data any, filename string) {
 	}
 }
 
-// 폴더 내의 첫번째 XLSX 파일을 찾습니다.
+// FindXlsx는 현재 작업 디렉토리에서 첫 번째 XLSX 파일을 찾습니다.
+// 찾은 파일의 이름을 반환합니다.
 func FindXlsx() string {
 	cwd, _ := os.Getwd()
 	entries, _ := os.ReadDir(cwd)

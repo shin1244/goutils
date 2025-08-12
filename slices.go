@@ -1,6 +1,6 @@
 package goutils
 
-// source 슬라이스의 요소들의 중복을 제거합니다.
+// SET은 source 슬라이스의 요소들의 중복을 제거합니다.
 // 결과값은 source 슬라이스의 요소들을 키로 하고, 빈 구조체를 값으로 가지는 맵입니다.
 func Set[T comparable](source []T) map[T]struct{} {
 	result := make(map[T]struct{}, len(source))
@@ -11,7 +11,7 @@ func Set[T comparable](source []T) map[T]struct{} {
 	return result
 }
 
-// target 슬라이스의 모든 요소가 source 슬라이스에 포함되어 있는지 확인합니다.
+// ContainsAll은 target 슬라이스의 모든 요소가 source 슬라이스에 포함되어 있는지 확인합니다.
 func ContainsAll[T comparable](source, target []T) bool {
 	sourceSet := Set(source)
 	for _, item := range target {
@@ -23,7 +23,7 @@ func ContainsAll[T comparable](source, target []T) bool {
 	return true
 }
 
-// target 슬라이스의 요소 중 하나라도 source 슬라이스에 포함되어 있는지 확인합니다.
+// ContainsAny는 target 슬라이스의 요소 중 하나라도 source 슬라이스에 포함되어 있는지 확인합니다.
 func ContainsAny[T comparable](source, target []T) bool {
 	sourceSet := Set(source)
 	for _, item := range target {
