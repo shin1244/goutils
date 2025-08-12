@@ -52,3 +52,18 @@ func Union[T comparable](slices ...[]T) []T {
 
 	return result
 }
+
+// RemoveMany는 source 슬라이스에서 target 슬라이스의 모든 요소를 제거한 새로운 슬라이스를 반환합니다.
+// target 슬라이스의 요소들은 source 슬라이스에 존재하지 않을 수도 있습니다.
+func RemoveMany[T comparable](source []T, target []T) []T {
+	targetSet := Set(target)
+	result := make([]T, 0, len(source))
+
+	for _, item := range source {
+		if _, ok := targetSet[item]; !ok {
+			result = append(result, item)
+		}
+	}
+
+	return result
+}
