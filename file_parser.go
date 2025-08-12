@@ -17,27 +17,21 @@ import (
 func OpenXlsx(path string) ([][][]string, error) {
 	f, err := excelize.OpenFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("failed to open XLSX file: %w", err)
+		return nil, fmt.Errorf("XLSX 파일 열기 실패: %w", err)
 	}
-	defer func() {
-		// 파일을 닫는 것을 잊지 마세요.
-		if err := f.Close(); err != nil {
-			fmt.Printf("failed to close XLSX file: %v\n", err)
-		}
-	}()
+	defer f.Close()
 
 	var allSheetsData [][][]string
 
-	// 모든 시트 이름을 가져옵니다.
 	sheetList := f.GetSheetList()
 	if len(sheetList) == 0 {
-		return nil, fmt.Errorf("no sheets found in XLSX file")
+		return nil, fmt.Errorf("XLSX에 시트가 존재하지 않음")
 	}
 
 	for _, sheetName := range sheetList {
 		rows, err := f.GetRows(sheetName)
 		if err != nil {
-			return nil, fmt.Errorf("failed to get rows from sheet '%s': %w", sheetName, err)
+			return nil, fmt.Errorf("시트에서 row를 읽을 수 없음 '%s': %w", sheetName, err)
 		}
 		allSheetsData = append(allSheetsData, rows)
 	}
@@ -49,7 +43,7 @@ func OpenXlsx(path string) ([][][]string, error) {
 func OpenTxt(path string) ([]string, error) {
 	file, err := os.Open(path)
 	if err != nil {
-		return nil, fmt.Errorf("failed to open text file: %w", err)
+		return nil, fmt.Errorf("텍스트 파일 열기 실패: %w", err)
 	}
 	defer file.Close()
 
@@ -60,7 +54,7 @@ func OpenTxt(path string) ([]string, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		return nil, fmt.Errorf("error reading text file: %w", err)
+		return nil, fmt.Errorf("텍스트 읽기 실패: %w", err)
 	}
 
 	return lines, nil
