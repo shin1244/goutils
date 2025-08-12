@@ -53,6 +53,27 @@ func Union[T comparable](slices ...[]T) []T {
 	return result
 }
 
+// Intersect는 여러 개의 슬라이스를 입력받아 모든 슬라이스에 공통적으로 존재하는 요소들을 포함하는 단일 슬라이스를 반환합니다.
+// 순서가 보장되지 않습니다.
+func Intersect[T comparable](slices ...[]T) []T {
+	intersectSet := Set(slices[0])
+
+	for _, slice := range slices[1:] {
+		currentSet := Set(slice)
+		for item := range intersectSet {
+			if _, ok := currentSet[item]; !ok {
+				delete(intersectSet, item)
+			}
+		}
+	}
+	result := make([]T, 0, len(intersectSet))
+	for item := range intersectSet {
+		result = append(result, item)
+	}
+
+	return result
+}
+
 // RemoveMany는 source 슬라이스에서 target 슬라이스의 모든 요소를 제거한 새로운 슬라이스를 반환합니다.
 // target 슬라이스의 요소들은 source 슬라이스에 존재하지 않을 수도 있습니다.
 func RemoveMany[T comparable](source []T, target []T) []T {
