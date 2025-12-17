@@ -10,8 +10,6 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-// This file contains functions for parsing data from various file formats (e.g., txt, xlsx, xml).
-
 // OpenXlsx는 지정된 경로의 XLSX 파일을 열고 모든 시트의 데이터를 읽어옵니다.
 // 반환 값은 [시트 인덱스][행 인덱스][열 인덱스] 형태의 문자열 슬라이스입니다.
 func OpenXlsx(path string) ([][][]string, error) {
