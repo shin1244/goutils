@@ -1,8 +1,8 @@
 package goutils
 
-// ReverseMap은 문자열을 키로 가지는 맵을 입력 받아 그 값을 키로, 키를 값으로 가지는 맵을 반환합니다.
-func ReverseMap[T comparable](m map[string]T) map[T]string {
-	res := make(map[T]string)
+// ReverseMap는 주어진 맵의 키와 값을 뒤바꾼 새로운 맵을 반환합니다.
+func ReverseMap[T, U comparable](m map[T]U) map[U]T {
+	res := make(map[U]T)
 	for k, v := range m {
 		res[v] = k
 	}
