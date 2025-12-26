@@ -117,3 +117,15 @@ func FindXlsx() string
 ```
 
 > 현재 작업 디렉토리(CWD)에서 첫 번째 `.xlsx` 파일을 찾아 파일명을 반환합니다. (파일을 찾지 못하면 Panic이 발생합니다.)
+
+
+### 🫠DB
+
+**`OpenDB`**
+
+```go
+OpenDB(dbType, host, port, user, pw, dbname string) (*sql.DB, error)
+
+```
+
+> 주어진 데이터베이스 유형, 호스트, 포트, 사용자 이름, 비밀번호 및 데이터베이스 이름을 사용하여 데이터베이스 연결을 엽니다.
