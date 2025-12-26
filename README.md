@@ -79,3 +79,41 @@ func ReverseMap[T, U comparable](m map[T]U) map[U]T
 ```
 
 > 주어진 맵의 키(Key)와 값(Value)을 뒤바꾼 새로운 맵을 반환합니다.
+
+### 🫠Parser
+
+**`OpenXlsx`**
+
+```go
+func OpenXlsx(path string) ([][][]string, error)
+
+```
+
+> 지정된 경로의 XLSX 파일을 열고, 모든 시트의 데이터를 `[시트][행][열]` 형태의 3차원 문자열 슬라이스로 반환합니다.
+
+**`OpenTxt`**
+
+```go
+func OpenTxt(path string) ([]string, error)
+
+```
+
+> 텍스트 파일을 한 줄씩 읽어 문자열 슬라이스로 반환합니다.
+
+**`MakeJsonFile`**
+
+```go
+func MakeJsonFile(data any, filename string)
+
+```
+
+> 주어진 데이터를 JSON 형식으로 직렬화하여 지정된 파일명으로 저장합니다.
+
+**`FindXlsx`**
+
+```go
+func FindXlsx() string
+
+```
+
+> 현재 작업 디렉토리(CWD)에서 첫 번째 `.xlsx` 파일을 찾아 파일명을 반환합니다. (파일을 찾지 못하면 Panic이 발생합니다.)
